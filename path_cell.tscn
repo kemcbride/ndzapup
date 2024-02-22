@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7acrpqubmaj1"]
+
+[ext_resource type="Texture2D" uid="uid://c5ssvh7715lqx" path="res://art/nd_zapup_pulses-red-3.png" id="1_qif2p"]
+[ext_resource type="Texture2D" uid="uid://bi2ahhns4hmss" path="res://art/nd_zapup_pulses-red-1.png" id="2_m0dr8"]
+[ext_resource type="Script" path="res://path_cell.gd" id="3_wbcn5"]
+[ext_resource type="AudioStream" uid="uid://p473j8kkespb" path="res://art/boop1.mp3" id="4_tb75q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fqhu7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qif2p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m0dr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_qif2p")
+}],
+"loop": false,
+"name": &"lit",
+"speed": 10.0
+}]
+
+[node name="PathCell" type="AnimatedSprite2D"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_fqhu7")
+animation = &"lit"
+script = ExtResource("3_wbcn5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tb75q")
+volume_db = -0.5

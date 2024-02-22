@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dciqnlyf1bvij"]
+
+[ext_resource type="Script" path="res://path_segment.gd" id="1_vi1ex"]
+[ext_resource type="PackedScene" uid="uid://b7acrpqubmaj1" path="res://path_cell.tscn" id="2_k4e0n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cltyd"]
+radius = 8.0
+height = 138.0
+
+[node name="PathSegment" type="Node2D"]
+script = ExtResource("1_vi1ex")
+
+[node name="PathCell1" parent="." instance=ExtResource("2_k4e0n")]
+
+[node name="PathCell2" parent="." instance=ExtResource("2_k4e0n")]
+position = Vector2(0, 60)
+
+[node name="PathCell3" parent="." instance=ExtResource("2_k4e0n")]
+position = Vector2(0, 120)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 60)
+shape = SubResource("CapsuleShape2D_cltyd")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

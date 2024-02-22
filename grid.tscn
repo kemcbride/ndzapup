@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c33qhpa116fvb"]
+
+[ext_resource type="Script" path="res://grid.gd" id="1_h16m4"]
+[ext_resource type="PackedScene" uid="uid://c81eefde157tj" path="res://pulse_cell.tscn" id="1_i5j20"]
+[ext_resource type="PackedScene" uid="uid://dciqnlyf1bvij" path="res://path_segment.tscn" id="2_nyeje"]
+[ext_resource type="AudioStream" uid="uid://b6wchl22bbr3w" path="res://art/tick.mp3" id="4_yxbbe"]
+
+[node name="Grid" type="Node2D"]
+script = ExtResource("1_h16m4")
+pcell_scene = ExtResource("1_i5j20")
+pseg_scene = ExtResource("2_nyeje")
+metadata/_edit_group_ = true
+
+[node name="GridTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="TimerTicker" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yxbbe")
+volume_db = 5.012
+
+[connection signal="timeout" from="GridTimer" to="." method="_on_grid_timer_timeout"]

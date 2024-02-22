@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://bb5jg2as6pvha"]
+
+[ext_resource type="PackedScene" uid="uid://c33qhpa116fvb" path="res://grid.tscn" id="1_r2yho"]
+[ext_resource type="Script" path="res://main.gd" id="1_wkvwb"]
+[ext_resource type="Texture2D" uid="uid://bi2ahhns4hmss" path="res://art/nd_zapup_pulses-red-1.png" id="2_jiwnk"]
+[ext_resource type="Texture2D" uid="uid://cdyq24jjuareh" path="res://art/nd_zapup_pulses-yellow-1.png" id="3_gl22i"]
+[ext_resource type="Texture2D" uid="uid://1nrux7gp8747" path="res://art/nd_zapup_pulses-blue-1.png" id="4_02of3"]
+[ext_resource type="Texture2D" uid="uid://dmjf872jfnujj" path="res://art/nd_zapup_pulses-green-1.png" id="5_i0txt"]
+[ext_resource type="AudioStream" uid="uid://bi4ceomhihyi5" path="res://art/Miracles Happen (Soundtrack Version)-NDWpP6EYFoU.mp3" id="6_cli46"]
+[ext_resource type="Script" path="res://MuteButton.gd" id="7_gkrop"]
+[ext_resource type="PackedScene" uid="uid://dt3cxkoy1v53r" path="res://life_counter.tscn" id="9_j8pjd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kmviw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wyl0"]
+font_size = 60
+
+[node name="Main" type="Node2D"]
+material = SubResource("CanvasItemMaterial_kmviw")
+script = ExtResource("1_wkvwb")
+grid_scene = ExtResource("1_r2yho")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 344.0
+offset_bottom = 120.0
+text = "ZapUp!"
+label_settings = SubResource("LabelSettings_3wyl0")
+horizontal_alignment = 1
+
+[node name="ExampleRedDot" type="Sprite2D" parent="."]
+position = Vector2(160, 184)
+texture = ExtResource("2_jiwnk")
+
+[node name="ExampleYellowDot" type="Sprite2D" parent="."]
+position = Vector2(160, 312)
+texture = ExtResource("3_gl22i")
+
+[node name="ExampleBlueDot" type="Sprite2D" parent="."]
+position = Vector2(160, 464)
+texture = ExtResource("4_02of3")
+
+[node name="ExampleGreenDot" type="Sprite2D" parent="."]
+position = Vector2(160, 608)
+texture = ExtResource("5_i0txt")
+
+[node name="NewGameButton" type="Button" parent="."]
+offset_left = 1248.0
+offset_top = 736.0
+offset_right = 1696.0
+offset_bottom = 944.0
+theme_override_font_sizes/font_size = 72
+text = "New Game"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_cli46")
+volume_db = -0.5
+pitch_scale = 1.1
+
+[node name="MuteButton" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 720.0
+offset_right = 376.0
+offset_bottom = 856.0
+theme_override_font_sizes/font_size = 48
+toggle_mode = true
+text = "Mute/Unmute"
+script = ExtResource("7_gkrop")
+
+[node name="YouWinButton" type="Button" parent="."]
+visible = false
+offset_left = 1080.0
+offset_top = 280.0
+offset_right = 1856.0
+offset_bottom = 688.0
+theme_override_font_sizes/font_size = 100
+text = "YOU WIN!!!"
+
+[node name="YouLoseButton" type="Button" parent="."]
+visible = false
+offset_left = 1080.0
+offset_top = 280.0
+offset_right = 1856.0
+offset_bottom = 688.0
+theme_override_font_sizes/font_size = 100
+text = "YOU LOSE!!!!!"
+
+[node name="LifeCounter" parent="." instance=ExtResource("9_j8pjd")]
+position = Vector2(72, 1160)
+
+[connection signal="pressed" from="NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="no_more_lives" from="LifeCounter" to="." method="_on_life_counter_no_more_lives"]
